@@ -4,6 +4,7 @@
 export const profile = {
   name: 'Jayadev Suresh Kumar',
   initials: 'JSK',
+  photo: '/profile.jpg',
   title: 'Lead Data Engineer · AI-ready data platforms',
   tagline:
     'I build the data, API and agent layers that make enterprise generative AI work, on Snowflake, AWS and GCP.',
