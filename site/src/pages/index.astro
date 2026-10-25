@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import { profile, intro, skills, experience } from '../data/profile';
+import { projects } from '../data/projects';
+---
+<Base>
+  <section class="hero">
+    <div class="avatar" aria-hidden="true">{profile.initials}</div>
+    <div>
+      <h1>{profile.name}</h1>
+      <p class="lede">{profile.title}</p>
+      <p class="meta">{profile.location}</p>
+    </div>
+  </section>
+
+  <p class="lede" style="margin-top:1.5rem">{profile.tagline}</p>
+
+  <div class="actions">
+    <a class="btn primary" href="/projects/">See my work</a>
+    <a class="btn" href={profile.linkedin} target="_blank" rel="me noopener">LinkedIn</a>
+    {profile.resumeUrl && <a class="btn" href={profile.resumeUrl}>Resume</a>}
+  </div>
+
+  <h2>About</h2>
+  <div class="prose">
+    {intro.map((p) => <p>{p}</p>)}
+  </div>
+
+  <h2>Selected work</h2>
+  <div class="cards">
+    {projects.map((p) => (
+      <article class="card">
+        <a class="stretch" href={`/projects/${p.slug}/`}><h3>{p.title}</h3></a>
+        <p>{p.summary}</p>
+      </article>
+    ))}
+  </div>
+
+  <h2>Skills</h2>
+  <div class="skills">
+    {skills.map((s) => (
+      <div>
+        <h3>{s.group}</h3>
+        <ul class="tags">{s.items.map((i) => <li>{i}</li>)}</ul>
+      </div>
+    ))}
+  </div>
+
+  <h2>Experience</h2>
+  <ul class="timeline">
+    {experience.map((e) => (
+      <li><span><strong>{e.role}</strong> · {e.org}</span><span class="dates">{e.dates}</span></li>
+    ))}
+  </ul>
+</Base>

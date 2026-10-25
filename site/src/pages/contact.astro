@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { profile } from '../data/profile';
+---
+<Base title="Contact">
+  <h1>Contact</h1>
+  <div class="prose">
+    <p>The best way to reach me is a message on LinkedIn.</p>
+    <div class="actions">
+      <a class="btn primary" href={profile.linkedin} target="_blank" rel="me noopener">Message me on LinkedIn</a>
+      {profile.email && <a class="btn" href={`mailto:${profile.email}`}>Email</a>}
+    </div>
+  </div>
+</Base>

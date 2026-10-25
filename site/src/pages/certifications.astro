@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import { certifications } from '../data/profile';
+---
+<Base title="Certifications">
+  <h1>Certifications</h1>
+  <ul class="timeline" style="margin-top:2rem">
+    {certifications.map((c) => (
+      <li><span><strong>{c.name}</strong> · {c.issuer}</span><span class="dates">{c.date}</span></li>
+    ))}
+  </ul>
+</Base>

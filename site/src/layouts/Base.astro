@@ -1,0 +1,57 @@
+---
+import '../styles/global.css';
+import { profile } from '../data/profile';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title, description = profile.tagline } = Astro.props;
+const fullTitle = title ? `${title} · ${profile.name}` : `${profile.name} · ${profile.title}`;
+const path = Astro.url.pathname;
+const nav = [
+  { href: '/', label: 'About' },
+  { href: '/projects/', label: 'Projects' },
+  { href: '/certifications/', label: 'Certifications' },
+  { href: '/how-this-site-is-built/', label: 'How it’s built' },
+  { href: '/contact/', label: 'Contact' },
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="canonical" href={new URL(path, Astro.site)} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href="/">{profile.name}</a>
+        <nav aria-label="Main">
+          {nav.map((n) => (
+            <a href={n.href} aria-current={(n.href === '/' ? path === '/' : path.startsWith(n.href)) ? 'page' : undefined}>
+              {n.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </header>
+    <main class="wrap">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <span>© {new Date().getFullYear()} {profile.name}</span>
+        <a href={profile.linkedin} rel="me noopener" target="_blank">LinkedIn</a>
+        {profile.github && <a href={profile.github} rel="me noopener" target="_blank">GitHub</a>}
+      </div>
+    </footer>
+  </body>
+</html>

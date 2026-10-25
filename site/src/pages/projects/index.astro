@@ -1,0 +1,17 @@
+---
+import Base from '../../layouts/Base.astro';
+import { projects } from '../../data/projects';
+---
+<Base title="Projects" description="Case studies in AI data pipelines, Snowflake data products and developer productivity.">
+  <h1>Projects</h1>
+  <p class="lede">Selected work. Details are kept general to respect client confidentiality.</p>
+  <div class="cards" style="margin-top:2rem">
+    {projects.map((p) => (
+      <article class="card">
+        <a class="stretch" href={`/projects/${p.slug}/`}><h3>{p.title}</h3></a>
+        <p>{p.summary}</p>
+        <ul class="tags">{p.stack.slice(0, 5).map((t) => <li>{t}</li>)}</ul>
+      </article>
+    ))}
+  </div>
+</Base>

@@ -1,0 +1,42 @@
+name: Deploy site to AWS (manual)
+
+# Manual only while the site is hosted on GitHub Pages (see pages.yml).
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write   # needed for AWS OIDC sign-in
+  contents: read
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      - run: npm ci
+      - run: npm run build
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: us-east-1
+
+      - name: Upload to S3
+        run: aws s3 sync dist "s3://${{ vars.SITE_BUCKET }}" --delete
+
+      - name: Refresh CloudFront cache
+        run: aws cloudfront create-invalidation --distribution-id "${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}" --paths "/*"
