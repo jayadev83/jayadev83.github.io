@@ -1,9 +1,0 @@
-# Copy to terraform.tfvars and fill in. terraform.tfvars is git-ignored.
-
-domain_name        = "yourname.com"
-create_hosted_zone = false          # false if registered in Route 53, true if registered elsewhere
-budget_email       = "you@example.com"
-aws_profile        = "site"
-
-# Fill in after the GitHub repo exists, then run terraform apply again.
-github_repo = ""                    # e.g. "your-github-user/personal-site"

@@ -23,7 +23,3 @@ npm install
 npm run build      # output in site/dist
 npm run dev        # live preview at http://localhost:4321 (needs Node 20+)
 ```
-
-## Optional: AWS version (not in use)
-
-`infra/`, `tf.ps1`, `deploy.ps1` and `.github/workflows/deploy.yml` define an alternative AWS hosting setup: a private S3 bucket behind CloudFront with HTTPS, Route 53 DNS, a budget alert, and a GitHub deploy role using OpenID Connect. None of it is deployed, and the AWS workflow only runs if triggered manually. See the comments in `infra/` if you ever want to move the site to AWS.
