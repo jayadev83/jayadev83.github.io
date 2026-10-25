@@ -51,6 +51,25 @@ export const projects: Project[] = [
       'A ~22 TB, ~400B-row claims data platform with 18K+ tables, ingesting ~6B rows (~2.4 TB) a month through 1,800+ Snowpipe pipes, serving 15M+ queries a month to 170+ users at a ~0.3 s median, with a 99.97% task success rate. I was also part of a 2025 build-out that added 13K+ objects, ~5,000 of them in a single month.',
   },
   {
+    slug: 'ai-token-efficiency-toolkit',
+    title: 'Token-efficiency toolkit for AI-assisted development',
+    summary:
+      'A set of prompts, instructions, skills, hooks and custom agents in VS Code that monitors how I work with GitHub Copilot and models like Claude, and keeps token usage down.',
+    stack: ['GitHub Copilot', 'Claude', 'Visual Studio Code', 'Custom agents', 'Skills', 'Hooks', 'Prompt engineering'],
+    problem:
+      'AI coding assistants are most useful in short, focused sessions. Long chats with many iterations, vague prompts and unnecessary tool calls or file reads burn tokens and slow answers down, and there was no easy way to see it happening.',
+    approach: [
+      'Hooks that watch each chat and warn me when it runs for too many iterations, with a summary I can carry into a fresh chat.',
+      'A prompt check that flags prompts too generic to answer efficiently and suggests how to make them specific.',
+      'Skills that cut token use by minimising tool calls and reading only the parts of files that matter.',
+      'Custom agents and reusable instructions so common tasks start with the right context instead of rediscovering it.',
+      'Weekly reports on token usage and working patterns, so I can see what changed and where to improve.',
+    ],
+    role: 'Designer and builder.',
+    outcome:
+      'Shorter, more focused AI sessions with fewer wasted iterations, and weekly visibility of token usage and efficiency.',
+  },
+  {
     slug: 'claims-insights-genai',
     title: 'GenAI claims insights for handlers (hackathon)',
     summary:
